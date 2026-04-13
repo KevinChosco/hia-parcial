@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  my-node-app:
+    image: kchosco29/my-node-app:latest
+    container_name: my-node-app
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --interval 30 --cleanup
+    environment:
+      - WATCHTOWER_POLL_INTERVAL=30
+      # Si quieres que solo vigile a tu app y no a otros contenedores:
+      - WATCHTOWER_MONITOR_ONLY_CONTAINERS=my-node-app
