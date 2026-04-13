@@ -9,13 +9,14 @@ services:
       - "3000:3000"
 
   watchtower:
-    image: containrrr/watchtower
+    image: containrrr/watchtower:latest
     container_name: watchtower
     restart: unless-stopped
     volumes:
+      # En Windows/WSL2 esta es la forma más estable
       - /var/run/docker.sock:/var/run/docker.sock
-    command: --interval 30 --cleanup
     environment:
+      # Forzamos a que use una versión de API moderna (acorde a tu versión 4.68)
+      - DOCKER_API_VERSION=1.41 
       - WATCHTOWER_POLL_INTERVAL=30
-      # Si quieres que solo vigile a tu app y no a otros contenedores:
       - WATCHTOWER_MONITOR_ONLY_CONTAINERS=my-node-app

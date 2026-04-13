@@ -4,7 +4,7 @@ const express = require('express');
 const app = express();
 // Definimos una ruta GET
 app.get('/', (req, res) => {
- res.json({ mensaje: 'HOLA MUNDO!' });
+ res.json({ mensaje: 'HOLA MUNDO 2.0!' });
 });
 // Iniciamos el servidor
 const PORT = 3000;
